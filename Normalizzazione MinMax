@@ -1,0 +1,18 @@
+#normalizzazione dati Min/Max
+from sklearn.preprocessing import MinMaxScaler
+import pandas as pd
+
+# Caricare il dataset
+df = pd.read_csv("dataset.csv")
+
+# Selezionare solo la colonna del volume
+volume = df[['Volume']]
+
+# Inizializzare l'oggetto MinMaxScaler
+scaler = MinMaxScaler()
+
+# Adattare lo scaler al volume
+scaler.fit(volume)
+
+# Trasformare i dati del volume
+volume_normalizzato = scaler.transform(volume)
