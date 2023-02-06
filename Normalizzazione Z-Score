@@ -1,0 +1,18 @@
+#Normalizzazione z-score
+from sklearn.preprocessing import StandardScaler
+import pandas as pd
+
+# Caricare il dataset
+df = pd.read_csv("dataset.csv")
+
+# Selezionare solo la colonna del volume
+volume = df[['Volume']]
+
+# Inizializzare l'oggetto StandardScaler
+scaler = StandardScaler()
+
+# Adattare lo scaler al volume
+scaler.fit(volume)
+
+# Trasformare i dati del volume
+volume_normalizzato = scaler.transform(volume)
