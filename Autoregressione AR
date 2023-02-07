@@ -1,0 +1,18 @@
+# Autoregressione
+
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+
+# Caricare i dati in un dataframe
+df = pd.read_csv("data.csv")
+
+# Definire la variabile dipendente (y) e la variabile indipendente (x)
+y = df["binary_string"]
+x = df.drop("binary_string", axis=1)
+
+# Creare un modello AR utilizzando l'endog e l'exog del modello ARIMA in statsmodels
+model = sm.tsa.ARIMA(endog=y, exog=x, order=(1, 0, 0)).fit()
+
+# Stampa del riepilogo del modello AR
+print(model.summary())
