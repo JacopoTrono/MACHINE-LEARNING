@@ -1,0 +1,28 @@
+# PCA: Tecnica di riduzione dimensionale utilizzata per comprendere le relazioni tra le variabili in un insieme di dati.
+
+import pandas as pd
+import numpy as np
+from sklearn.decomposition import PCA
+
+# Creazione del dataset binario
+binary_data = [["A", 1, 0.5, "morning"], 
+               ["B", 2, 0.7, "afternoon"], 
+               ["A", 1.5, 0.6, "morning"], 
+               ["B", 2.5, 0.8, "afternoon"], 
+               ["A", 1.7, 0.9, "morning"], 
+               ["B", 2.3, 0.7, "afternoon"]]
+
+# Creazione del DataFrame da utilizzare per l'analisi
+df = pd.DataFrame(binary_data, columns=["Class", "Volume", "ATR", "Time"])
+
+# Creazione di un array numpy dai dati del DataFrame
+data = df.values
+
+# Creazione dell'oggetto PCA
+pca = PCA(n_components=2)
+
+# Calcolo delle componenti principali
+principalComponents = pca.fit_transform(data)
+
+# Creazione del nuovo DataFrame con le componenti principali
+principal_df = pd.DataFrame(data = principalComponents, columns = ['PC1', 'PC2'])
