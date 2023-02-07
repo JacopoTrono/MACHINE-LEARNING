@@ -1,0 +1,46 @@
+# Aggiunta metriche accuratezza
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score, accuracy_score
+
+# Carica i dati dal file CSV
+data = pd.read_csv("dati.csv")
+
+# Dividi i dati in variabili indipendenti (X) e variabile dipendente (y)
+X = data[['V', 'X', 'H']]
+y = data['A_or_B']
+
+# Dividi i dati in set di addestramento e di test
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Crea un modello di regressione logistica
+model = LogisticRegression()
+
+# Addestra il modello utilizzando i dati di addestramento
+model.fit(X_train, y_train)
+
+# Effettua previsioni sul set di test
+y_pred = model.predict(X_test)
+
+# Calcola la matrice di confusione
+cm = confusion_matrix(y_test, y_pred)
+
+# Calcola il rapporto di classificazione
+cr = classification_report(y_test, y_pred)
+
+# Calcola l'area sotto la curva ROC
+auc = roc_auc_score(y_test, y_pred)
+
+# Calcola l'accuratezza
+acc = accuracy_score(y_test, y_pred)
+
+# Stampa i risultati
+print("Matrice di confusione:")
+print(cm)
+print("\nRapporto di classificazione:")
+print(cr)
+print("\nAUC-ROC:", auc)
+print("\nAccuratezza:", acc)
